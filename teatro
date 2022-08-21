@@ -1,0 +1,68 @@
+class prenotazioni {
+  prenotazione = [];
+  constructor(posti, elem) {
+    var elemento_DOM = document.getElementById(elem);
+    this.prenotazione = posti.map((fila, i) => {
+      var p = fila.map((nome, j) => {
+        var btn = document.createElement('button');
+        elemento_DOM.appendChild(btn);
+        btn.value = nome;
+        btn.style.color = nome !== 'x' ? 'red' : 'green';
+        btn.innerHTML = 'P' + (j + 1) + (i + 1);
+        btn.addEventListener('click', this.seleziona_posto);
+        return btn;
+      });
+      elemento_DOM.appendChild(document.createElement('br'));
+      return p;
+    });
+  }
+  seleziona_posto() {
+    if (prenota_DOM.value !== '' && this.value == 'x') {
+      this.value = prenota_DOM.value;
+      this.style.color = 'red';
+      prenota_DOM.value = '';
+    }
+    else if (prenota_DOM.value !== '' && this.value != 'x'){
+      nomi_DOM.innerHTML = occupato;
+    } else nomi_DOM.innerHTML = this.value;
+  }
+  toArray() {
+    return this.prenotazione.map((fila) => fila.map((x) => x.value));
+  }
+}
+
+//se il posto è occupato avvisa che non si può prenotare
+
+
+const prenota_DOM = document.getElementById('prenota');
+const nomi_DOM = document.getElementById('nomi');
+
+const teatro = {
+  platea: Array(7)
+    .fill('')
+    .map(() => Array(10).fill('x')),
+  palchi: Array(4)
+    .fill('')
+    .map(() => Array(6).fill('x')),
+};
+teatro.platea[2][1] = 'Marco';
+teatro.platea[3][4] = 'Irene';
+teatro.palchi[2][1] = 'Alessandro';
+
+var occupato = "Posto già occupato";
+var prenotazione_platea = new prenotazioni(teatro.platea, 'platea');
+var prenotazione_palchi = new prenotazioni(teatro.palchi, 'palchi');
+
+
+document.getElementById('vedi').onclick = () => {
+  nomi_DOM.innerHTML = prenotation();
+  /*console.log(prenotazione_platea.toArray());
+  console.log(prenotazione_palchi.toArray());*/
+}
+
+
+//la funzione non restituisce i risultati in maniera corretta
+//restituisce "array [10]" e "array [6]"
+function prenotation(){
+  var pren = 11;
+  }
